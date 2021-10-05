@@ -1,0 +1,11 @@
+{
+  "name": "figma-taliwind-Ahmad",
+  "id": "1027293731621136755",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": [
+    "figma",
+    "figjam"
+  ],
+  "ui": "ui.html"
+}
