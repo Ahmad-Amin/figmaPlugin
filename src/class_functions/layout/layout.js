@@ -1,5 +1,5 @@
 //layouts
-const { flexMap, justifyMap, alignMap } = require('../maps/layoutMaps.js');
+const { flexMap, justifyMap, alignMap } = require('../../maps/layoutMaps/layoutMaps.js');
 const { pixelToTailwind } = require('../maps/maps.js');
 //flex
 function getValues(node){

@@ -1,6 +1,6 @@
-import { colorMap, pixelToTailwind, fontPixelToTailwind, fontWeightMap, fractionalPixelHaystack } from "../maps/map";
-import {RGBToHex} from '../utils/util_functions';
-import {boxShadowMap} from '../maps/boxShadow';
+import { colorMap, pixelToTailwind, fontPixelToTailwind, fontWeightMap, fractionalPixelHaystack } from "../../maps/map/map";
+import {RGBToHex} from '../../utils/util_functions/util_functions';
+import {boxShadowMap} from '../../maps/boxShadow/boxShadow';
 
 function getBGColor(node){
     let bgColor, bgColorString;

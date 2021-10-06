@@ -1,38 +1,30 @@
-let changedBreakpoints = {
-    //map for changed breakpoint classes -- keys -> {node ids}, values -> {added breakpoints classes from the UI}
-}       
-let addedCustomClasses = {
-    //map for plain normal classes -- keys -> {node ids}, values -> {added custom classes from the UI}
-} 
-let addedTagName = {
-    //map for tag names -- keys -> {node ids}, values -> {added tag name from the UI}
-}
+let changedBreakpoints = {};
+let addedCustomClasses = {};
+let addedTagName = {};
 
 //function for iterating over a map and finding the respective node's data in that map
-function iter(obj, node){
+
+function iter(objMap, node){
     if(!node) return {};
-    let ret_obj = {}
-    Object.keys(obj).forEach(key => {
-            if ( key == node.id){
-                // console.log('key-obj pair', key, obj[key])
-                ret_obj.key = key;
-                ret_obj.classes = obj[key]
-            }else{
-                iter(obj[key])
-            }
-        })
-    return ret_obj
+    let returnObj = {};
+    Object.keys(objMap).forEach(key => {
+        if(key == node.id){
+            returnObj['key'] = key;
+            returnObj['Classes'] = objMap[key];
+        }
+    });
+    return returnObj;
 }
 
-//function for checking the changed breakpoints map
+
+// function for checking the changed breakpoints Map
 function addBreakpointsClasses(node){
     const obj = iter(changedBreakpoints, node);
     let key = obj.key;
     let classes = obj.classes;
     let smClasses, mdClasses, lgClasses, xlClasses, _2xlClasses;
-    if(classes){
-    // console.log(classes.sm)
 
+    if(classes){
         smClasses = classes.sm.split(' ').map(att => {
             if(att=='' || att==' ') return '';
             return `sm:${att}`
@@ -63,9 +55,7 @@ function addBreakpointsClasses(node){
             let nameArr = node.name.split('');//gives the name as an array
             let cutCount = nameArr.slice(nameArr.indexOf('(')+1, nameArr.indexOf(')')).length;
             nameArr.splice(nameArr.indexOf('(')+1, cutCount)
-            // console.log('name', node.name)
             let convString = nameArr.join('').replace(')', `${combinedClasses})`);
-            // node.name += `(${combinedClasses})`;
             node.name = convString;
         }
         return combinedClasses;
@@ -76,7 +66,8 @@ function addBreakpointsClasses(node){
         }
         return '';
     } 
-} 
+}
+
 
 function addCustomClasses(node){
     const obj = iter(addedCustomClasses, node);
