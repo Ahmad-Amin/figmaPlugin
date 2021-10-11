@@ -36,6 +36,12 @@ const createCode = (node, level) => {
 
         codeString += `${indent}</div>\n`;
     }else{
+
+        if(node.type == 'RECTANGLE'){
+            classString = ` ${getBGColor(node)} ${getWidth(node)} ${getHeight(node)} ${getLayout(node)} ${getBorderWidthClass(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getSpacingFromParent(node)} ${getBoxShadow(node)}`;
+            codeString += `${indent}<div class='${classString}'></div>`;
+        }
+        
         if(node.type == 'TEXT'){
             classString = `${textClasses(node)} ${getSpacingFromParent(node)} ${getBoxShadow(node)}`;
             if(node.characters){
