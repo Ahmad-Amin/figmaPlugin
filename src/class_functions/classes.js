@@ -3,13 +3,13 @@ const  { colorMap,
     fontPixelToTailwind,
     maxWidthPixelToTailwind,
     fontWeightMap, 
-    fractionalPixelHaystack } = require('../maps/maps');
+    fractionalPixelHaystack } = require('../maps/map');
 
 const {RGBToHex} = require('../utils/util_functions');
 
-const { boxShadowMap } = require('../maps/boxShadow');        
+import { boxShadowMap } from '../maps/boxShadow';
 
-function getBGColor(node){ 
+export const getBGColor = (node) => { 
     let bgColor, bgColorString;
     if(node.type != 'GROUP'){
         // console.log(node.type)
@@ -79,7 +79,7 @@ function checkForMaxWidth(width){
     return false;
 }
 
-function getWidth(node){
+export const getWidth = (node) => {
     let w = Math.round(node.width, 1);
     if(w>384){
         return getFractionalWidth(node);
@@ -89,7 +89,7 @@ function getWidth(node){
     return ``;
 }
 
-function getHeight(node){
+export const getHeight = (node) => {
     let h = Math.round(node.height, 1);
     if(h>384){
         // return getFractionalHeight(node);
@@ -101,7 +101,7 @@ function getHeight(node){
 }
 
 //function for layouts of containers
-function getLayout(node){
+export const getLayout = (node) => {
     let flex;
     let flexClasses = '';
     let layout = node.layoutMode;//gives vertical or horizontal
@@ -115,7 +115,7 @@ function getLayout(node){
 
 //function for paddings
 //TODO
-function getPadding(node){
+export const getPadding = (node) => {
     let paddingX, paddingY;
     if(node && node.parent.children[1]){
         paddingX = node.parent.children[1].x - node.x; 
@@ -127,18 +127,6 @@ function getPadding(node){
     return `px-${pixelToTailwind[paddingX]?pixelToTailwind[paddingX]:''} py-${pixelToTailwind[paddingY]?pixelToTailwind[paddingY]:''}`;
 }
 
-// function for margins
-function getMargin(node){
-    //function for frames
-    // let marginX, marginY;
-    // //this margin is in the case when only one child
-    // marginX = node.x - node.parent.x;
-    // // marginXRight = node.parent.width - node.width - node.x;
-    // marginY = node.y - node.parent.y;
-    // return `mx-${pixelToTailwind[marginX]?pixelToTailwind[marginX]:''} my-${pixelToTailwind[marginY]?pixelToTailwind[marginY]:''}`;
-    if(node.parent.chilren.length>1){//more than one child
-    }
-}
 
 //TODO
 // function getBorderRadius(node){
@@ -149,7 +137,7 @@ function getMargin(node){
 //     return '';
 // }
 
-function textClasses(node){
+export const textClasses = (node) => {
     // console.log(node.fills)
     let textColor;
     let textColorString;
@@ -189,7 +177,7 @@ function textClasses(node){
 }  
 
 //box shadow function
-function getBoxShadow(node){
+export const getBoxShadow = (node) => {
     //getting all the properties from the node to create a string and then mapping those properties to a single tailwind class
     let shadowEffectArray = [];
     if(node.effects){
@@ -228,7 +216,7 @@ function getBoxShadow(node){
     return shadowClass;
 }
 
-function closestPossibleShadow(shadowClassString, v){
+export const closestPossibleShadow = (shadowClassString, v) => {
     let figmaShadowArray = shadowClassString.split('_');
     let tailwindShadowMap = v.split('_');
     let val = 0 
@@ -236,16 +224,4 @@ function closestPossibleShadow(shadowClassString, v){
         val = val + (parseFloat(figmaShadowArray[i]) - parseFloat(tailwindShadowMap[i]));
     }
     return Math.abs(val);
-}
-
-module.exports = {
-    getBGColor,
-    getFractionalWidth,
-    getWidth,
-    getHeight,
-    getLayout,
-    textClasses,
-    getPadding,
-    getMargin,
-    getBoxShadow
 }

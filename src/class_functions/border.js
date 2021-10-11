@@ -1,6 +1,6 @@
-const { borderRadiusMap, borderWidthMap } = require('../maps/maps');
-import {RGBToHex} from '../utils/util_functions.js';
-import {colorMap} from '../maps/map.js';
+const { borderRadiusMap, borderWidthMap } = require('../maps/map');
+import {RGBToHex} from '../utils/util_functions';
+import {colorMap} from '../maps/map';
 
 export const getBorderRadiusClass = (node) => {
     

@@ -1,24 +1,17 @@
-const flexMap = {
+export const flexMap = {
     'HORIZONTAL': 'flex flex-row',
     'VERTICAL': 'flex flex-col'
 }
 
-const justifyMap = {
+export const justifyMap = {
     'MIN': 'justify-start',
     'MAX': 'justify-end',
     'CENTER': 'justify-center',
     'SPACE_BETWEEN': 'justify-between',
 }
 
-const alignMap = {
+export const alignMap = {
     'MIN': 'items-start',
     'MAX': 'items-end',
     'CENTER': 'items-center',
-}
-
-
-export default {
-    flexMap,
-    justifyMap,
-    alignMap
 }

@@ -1,4 +1,4 @@
-const boxShadowMap = {
+export const boxShadowMap = {
     //mapping only 6 box shadows
     //format in CSS --> x-offset y-offset blur spread color
     //colors are all black so not including that
@@ -9,8 +9,4 @@ const boxShadowMap = {
     '0_10_15_-3_0.1': 'shadow-lg',
     '0_20_25_-5_0.1': 'shadow-xl',
     '0_25_50_-12_0.25': 'shadow-2xl',
-}
-
-export default {
-    boxShadowMap
 }

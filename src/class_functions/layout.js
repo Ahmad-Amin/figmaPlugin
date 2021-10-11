@@ -1,8 +1,8 @@
 //layouts
-const { flexMap, justifyMap, alignMap } = require('../../maps/layoutMaps/layoutMaps.js');
-const { pixelToTailwind } = require('../maps/maps.js');
+const { flexMap, justifyMap, alignMap } = require('../maps/layoutMaps');
+const { pixelToTailwind } = require('../maps/map');
 //flex
-function getValues(node){
+export const getValues = (node) => {
     let mode = node.layoutMode; // flex-row or flex-col
     let justify = node.primaryAxisAlignItems; // justify-items 
     let align = node.counterAxisAlignItems; // align
@@ -27,7 +27,7 @@ function getValues(node){
     }
 }
 
-function getTailWindClasses(nodeObj){
+export const getTailWindClasses = (nodeObj) => {
     //takes in an object containing the values from the node
     //flex
     const flex = flexMap[nodeObj.mode];
@@ -50,7 +50,7 @@ function getTailWindClasses(nodeObj){
     }
 }
 
-function getSpacingFromParent(node){
+export const getSpacingFromParent = (node) => {
     if(node.parent  && node.parent.children.length > 1){
         if(node.parent.children.indexOf(node) == node.parent.children.length - 1 && node.parent.children.length>1){//last node
             return '';
@@ -59,21 +59,17 @@ function getSpacingFromParent(node){
         if(node.parent.primaryAxisAlignItems=='SPACE_BETWEEN'){
             return '';
         }
-        if(node.parent.layoutMode == 'VERTICAL'){
-            itemSpacing = node.parent.itemSpacing;
-            return `mb-${pixelToTailwind[itemSpacing]}`;
-        }else if(node.parent.layoutMode == 'HORIZONTAL'){
-            itemSpacing = node.parent.itemSpacing;
-            return `mr-${pixelToTailwind[itemSpacing]}`;
+        if("parent" in node){
+            if(node.parent.layoutMode == 'VERTICAL'){
+                itemSpacing = node.parent.itemSpacing;
+                return `mb-${pixelToTailwind[itemSpacing]}`;
+            }else if(node.parent.layoutMode == 'HORIZONTAL'){
+                itemSpacing = node.parent.itemSpacing;
+                return `mr-${pixelToTailwind[itemSpacing]}`;
+            }
         }
         return '';
     }else{
         return '';
     }
-}
-
-export default {
-    getValues,
-    getTailWindClasses,
-    getSpacingFromParent
 }

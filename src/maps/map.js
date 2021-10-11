@@ -1,4 +1,4 @@
-const colorMap = {
+export const colorMap = {
     //*THE SEQUENCE OF THE COLORS IS FROM THE TW DOCS
     //white
     '#FFFFFF':'white',
@@ -103,7 +103,7 @@ const colorMap = {
     '#831843':'pink-900',
    }
 
-   const maxWidthPixelToTailwind = {
+export const maxWidthPixelToTailwind = {
     '448': 'max-w-md',
     '512': 'max-w-lg',
     '576': 'max-w-xl',
@@ -115,7 +115,7 @@ const colorMap = {
     '1280': 'max-w-7xl'
 }
 
-   const pixelToTailwind = {
+export const pixelToTailwind = {
     '0':'0',
     '1':'px',
     '4':'1',
@@ -192,7 +192,7 @@ const colorMap = {
     'screen': 'screen'
 }
 
-const fractionalPixelHaystack = [
+export const fractionalPixelHaystack = [
     '8.33', 
     '16.66', 
     '25', 
@@ -207,7 +207,7 @@ const fractionalPixelHaystack = [
     '95'
 ];
 
-const fontPixelToTailwind = {
+export const fontPixelToTailwind = {
     '12':'text-xs',
     '14':'text-sm',
     '16':'text-base',
@@ -223,7 +223,7 @@ const fontPixelToTailwind = {
     '128':'text-9xl',
 }
 
-const fontWeightMap = {
+export const fontWeightMap = {
     //there are 9 font weights in figma with numbers
     //associated from 100 to 900
     'Thin':'font-thin',
@@ -237,7 +237,7 @@ const fontWeightMap = {
     'Black': 'font-black',
 }
 
-const borderRadiusMap = {
+export const borderRadiusMap = {
     //keyword == rounded that needs to be replaced with rounded-t- etc 
     '0':'-none', //0.375 rem
     '2':'-sm', //0.375 rem
@@ -250,7 +250,7 @@ const borderRadiusMap = {
     '9999':'-full', //0.375 rem
 }
 
-const borderWidthMap = {
+export const borderWidthMap = {
     //values on the left side are the pixel values from API
     //values on the right side  are the pixel values of tailwind classes
     //format -> rounded-2, rounded etc
@@ -259,19 +259,4 @@ const borderWidthMap = {
     '4': '-4',
     '8': '-8',
     '1': '',
-}
-
-
-
-//TEXT MAPS
-
-export {
-    colorMap,
-    pixelToTailwind,
-    fontWeightMap,
-    fontPixelToTailwind,
-    borderRadiusMap,
-    borderWidthMap,
-    fractionalPixelHaystack,
-    maxWidthPixelToTailwind
 }
