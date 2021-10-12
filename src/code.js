@@ -26,7 +26,8 @@ const createCode = (node, level) => {
         const values = getValues(node);
         const flexString = getTailWindClasses(values);
 
-        classString = ` ${getWidth(node)} ${getHeight(node)} ${getBGColor(node)} ${flexString} ${getBorderWidthClass(node)} ${getSpacingFromParent(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getBoxShadow(node)}`;
+        console.log(setBreakPoints(node.id, null));
+        classString = `${setBreakPoints(node.id, null)} ${getWidth(node)} ${getHeight(node)} ${getBGColor(node)} ${flexString} ${getBorderWidthClass(node)} ${getSpacingFromParent(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getBoxShadow(node)}`;
         classString = classString.replace('undefined', ''); //Removing any undefiend value (whose figma-->tailwind mapping is not avialable:)
         classString = classString.replace(/ +(?= )/g, ' ').trim();
         codeString +=`${indent}<div class='${classString}'>\n`;
@@ -39,13 +40,15 @@ const createCode = (node, level) => {
     }else{
 
         if(node.type == 'RECTANGLE'){
-            classString = ` ${getBGColor(node)} ${getWidth(node)} ${getHeight(node)} ${getLayout(node)} ${getBorderWidthClass(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getSpacingFromParent(node)} ${getBoxShadow(node)}`;
+            console.log(setBreakPoints(node.id, null));
+            classString = `${setBreakPoints(node.id, null)} ${getBGColor(node)} ${getWidth(node)} ${getHeight(node)} ${getLayout(node)} ${getBorderWidthClass(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getSpacingFromParent(node)} ${getBoxShadow(node)}`;
             classString = classString.replace(/ +(?= )/g, ' ').trim();
             codeString += `${indent}<div class='${classString}'></div>`;
         }
         
         if(node.type == 'TEXT'){
-            classString = `${textClasses(node)} ${getSpacingFromParent(node)} ${getBoxShadow(node)}`;
+            console.log(setBreakPoints(node.id, null));
+            classString = `${setBreakPoints(node.id, null)} ${textClasses(node)} ${getSpacingFromParent(node)} ${getBoxShadow(node)}`;
             classString = classString.replace(/ +(?= )/g, ' ').trim();
             if(node.characters){
                 codeString += `${indent}<p class='${classString}'>${node.characters.split('\n').join('&lt/br&gt')}</p>\n`;
@@ -66,8 +69,7 @@ figma.ui.onmessage = msg => {
         const node = figma.currentPage.selection[0];   //The current selected Layer in the figma Page
         let breakPoints = setBreakPoints(node.id, value);   // [this will transform the breakpoints object to breakpoints string and returns it]
         
-
-
+        createCode(node, 0);
 
         // figma.ui.postMessage({breakPoints, key: node.id});
 

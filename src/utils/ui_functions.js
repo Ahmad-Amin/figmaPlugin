@@ -7,7 +7,7 @@ let addedTagName = {};
 
 
 export const setBreakPoints = (key, breakpoints) => {
-
+    if(breakpoints === null){return '';}
     let breakPointString = '';
     Object.keys(breakpoints).map(val => {       //Mapping through all the keys from input breakpoints entered by the User
         if(breakpoints[val].length > 0){        // Checking if there is a value for a key (i.e. to ignore the key, whose value is empty)
