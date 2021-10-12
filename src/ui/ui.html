@@ -10,7 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
   <!-- <link rel="stylesheet" href="https://cdn.tuk.dev/dist/css/tailwind-v2.2.13.min.css" /> -->
 
+  <!-- CodeMirror Cdn Links -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css"> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js" integrity="sha512-w8mdbtlkBpU0p/dbFb4Oa1Hfd5k2mvOX82w0FnArHOPB28Ixai1Uj68X/3aK+/+35zNbTzBf9OfuSG+XTwnwCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/xml/xml.min.js" integrity="sha512-UWfBe6aiZInvbBlm91IURVHHTwigTPtM3M4B73a8AykmxhDWq4EC/V2rgUNiLgmd/i0y0KWHolqmVQyJ35JsNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://codemirror.net/theme/dracula.css">
+
   <title>Plugin</title>
+
 </head>
 
 <style>
@@ -424,6 +431,12 @@
       margin: auto;
     }
   }
+
+  #editorCode{
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+  }
 </style>
 
 <body>
@@ -497,8 +510,15 @@
         </div>
 
         <!--Code tab-->
+        <!-- <div class="tab1">
+          <div class="tab11 code-container">
+            <textarea id="editorCode"></textarea>
+          </div>
+        </div> -->
         <div class="tab1">
-          <div class="tab11 code-container"></div>
+          <div class="tab11">
+            <textarea name="" id="editorCode"></textarea>
+          </div>
         </div>
 
         <!-- HIDDENT TEXT AREA FOR COYPING CODE -->
@@ -872,13 +892,14 @@
           let _2xlClasses = document.querySelector('._2xl').value ? document.querySelector('._2xl').value : '';
 
           let classes = {
-            sm: smClasses,
-            md: mdClasses,
-            lg: lgClasses,
-            xl: xlClasses,
-            _2xl: _2xlClasses
+            'sm': smClasses,
+            'md': mdClasses,
+            'lg': lgClasses,
+            'xl': xlClasses,
+            '2xl': _2xlClasses
           }
           let nodeID = document.querySelector('.node-id').value;
+          
           parent.postMessage({ pluginMessage: { category: 'breakpoints', nodeID, classes } }, '*');
         }
 
@@ -899,6 +920,69 @@
           let tagName = document.querySelector('#text').value.trim();
           let nodeID = document.querySelector('.node-id').value;
           parent.postMessage({ pluginMessage: { category: 'tagName', nodeID, tagName } }, '*');
+        }
+
+        function formatCode(html) {
+            var tab = '   ';
+            var result = '';
+            var indent= '';
+
+            html.split(/>\s*</).forEach(function(element) {
+                if (element.match( /^\/\w/ )) {
+                    indent = indent.substring(tab.length);
+                }
+
+                result += indent + '<' + element + '>\r\n';
+
+                if (element.match( /^<?\w[^>]*[^\/]$/ ) && !element.startsWith("input")  ) { 
+                    indent += tab;              
+                }
+            });
+
+            return result.substring(1, result.length-3);
+        }
+        // Setup the codeMirror Editor
+
+        // Code Generated from Figma (receving Code from code.js file as postMessage)
+
+
+        var codeMirror = CodeMirror.fromTextArea(
+          document.getElementById('editorCode'), {
+              mode: "xml",
+              theme: "dracula",
+              lineNumbers: true,
+              readOnly: true
+            }
+          );
+        codeMirror.setSize(590, 480);
+        onmessage = (event) => {
+          let code = ``;
+          code = event.data.pluginMessage.codeString;
+          let bpValue = event.data.pluginMessage.bpValue;
+          let formatedCode = formatCode(code);
+          
+          // Checking if the code is changed or not
+          if(code.length > 1){
+            codeMirror.setValue(formatedCode);
+            codeMirror.refresh();
+          }
+
+          //If there is any already given breakpoints value, then fill in the value (to display)
+          if(bpValue){
+
+            document.querySelector('.sm').value = bpValue['sm'];
+            document.querySelector('.md').value = bpValue['md'];
+            document.querySelector('.lg').value = bpValue['lg'];
+            document.querySelector('.xl').value = bpValue['xl'];
+            document.querySelector('._2xl').value = bpValue['2xl'];
+          }else{
+            document.querySelector('.sm').value = "";
+            document.querySelector('.md').value = "";
+            document.querySelector('.lg').value = "";
+            document.querySelector('.xl').value = "";
+            document.querySelector('._2xl').value = "";
+          }
+
         }
 
       </script>
