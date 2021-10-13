@@ -396,6 +396,27 @@
     min-height: 263px;
   }
 
+  .customCss_tab{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 0.375rem;
+    padding-left: 0.25rem;
+    resize: none;
+    overflow: hidden;
+    --tw-bg-opacity: 1;
+    background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+    width: 100%;
+    --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border-radius: 00.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+    min-height: 263px;
+  }
+
   .code-container {
     overflow: scroll;
     font-family: 'Cousine', monospace;
@@ -583,7 +604,7 @@
         </div>
         <div class="tab2" style="margin-top: 1rem;">
           <div class="tab22">
-            <p class="tab2_text" style="margin-top: -20px;">Tailwindcss Utility Classes</p>
+            <p class="tab2_text" style="margin-top: -20px;">Tailwindcss Utility Classes (seperate two or more classes with sapce i.e. bg-red-100 font-bold)</p>
             <textarea type='text' data-size='sm' id="autoresizing5" class="tuc_tab"></textarea>
           </div>
 
@@ -682,46 +703,48 @@
         <div class="tab4">
           <div class="tab44">
             <button class="tab4_buttons" style="border:none; padding: 0.25rem; width: 3.5rem;" id="21"
-              onClick="duplicate(21);" value="hover: ">hover</button>
+              onClick="duplicate(21);" value=" hover:">hover</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 3.5rem; padding: 0.25rem;"
-              id="22" onClick="duplicate(22);" value="focus: ">focus</button>
+              id="22" onClick="duplicate(22);" value=" focus:">focus</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 4rem; padding: 0.25rem;" id="23"
-              onClick="duplicate(23);" value="active: ">active</button>
+              onClick="duplicate(23);" value=" active:">active</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 6rem; padding: 0.25rem;" id="24"
-              onClick="duplicate(24);" value="group-hover: ">group-hover</button>
+              onClick="duplicate(24);" value=" group-hover:">group-hover</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 6rem; padding: 0.25rem;" id="25"
-              onClick="duplicate(25);" value="group-focus: ">group-focus</button>
+              onClick="duplicate(25);" value=" group-focus:">group-focus</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 6.25rem; padding: 0.25rem;"
-              id="26" onClick="duplicate(26);" value="focus-within: ">focus-within</button>
+              id="26" onClick="duplicate(26);" value=" focus-within:">focus-within</button>
           </div>
 
           <div class="tab44" style="padding-left: 1rem; padding-right: 1rem; margin-top: -15px;">
             <button class="tab4_buttons" style="border:none; padding: 0.25rem; width: 5.5rem;" id="27"
-              onClick="duplicate(27);" value="motion-safe: ">motion-safe</button>
+              onClick="duplicate(27);" value=" motion-safe:">motion-safe</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 6rem; padding: 0.25rem;" id="28"
-              onClick="duplicate(28);" value="motion-reduce: ">motion-reduce</button>
+              onClick="duplicate(28);" value=" motion-reduce:">motion-reduce</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 4rem; padding: 0.25rem;" id="29"
-              onClick="duplicate(29);" value="disable: ">disable</button>
+              onClick="duplicate(29);" value=" disable:">disable</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 3.75rem; padding: 0.25rem;"
-              id="30" onClick="duplicate(30);" value="visited: ">visited</button>
+              id="30" onClick="duplicate(30);" value=" visited:">visited</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 4rem; padding: 0.25rem;" id="31"
-              onClick="duplicate(31);" value="checked: ">checked</button>
+              onClick="duplicate(31);" value=" checked:">checked</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 4rem; padding: 0.25rem;" id="32"
-              onClick="duplicate(32);" value="first: ">first-child</button>
+              onClick="duplicate(32);" value=" first:">first-child</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 4rem; padding: 0.25rem;" id="33"
-              onClick="duplicate(33);" value="last: ">last-child</button>
+              onClick="duplicate(33);" value=" last:">last-child</button>
           </div>
           <div class="tab44" style="margin-top: -15px;">
             <button class="tab4_buttons" style="border:none; padding: 0.25rem; width: 4rem;" id="34"
-              onClick="duplicate(34);" value="odd: ">odd-child</button>
+              onClick="duplicate(34);" value=" odd:">odd-child</button>
             <button class="tab4_buttons" style="border:none; margin-left: 1rem; width: 4rem; padding: 0.25rem;" id="35"
-              onClick="duplicate(35);" value="even: ">even-child</button>
+              onClick="duplicate(35);" value=" even:">even-child</button>
           </div>
         </div>
 
         <div class="tab2" style="margin-top: 24px;">
           <div class="tab22" style="padding-top: 2.5rem;">
             <p class="tab2_text">Hover, Focus, & Other States</p>
+              <h3 class="" style="margin-bottom: 0;">Syntax:</h3>
+              <p style="font-size: 16px;">state:class  (Do not Add Space between 'state:'' and 'class')</p>
             <textarea ID="info" type='text' data-size='sm' class="inter_tab"></textarea>
           </div>
         </div>
@@ -739,7 +762,19 @@
 
       <div id="settings" class="tabcontent tabh_content">
         <div class="tab_text">
-          <p>Settings</p>
+            <p>Settings (By default, Tailwind CSS is selected)</p>
+            <select name="" id="customCssTypeSelections">
+                <option selected value="tailwindCss">Tailwind</option>
+                <option value="CustomCss">Custom CSS</option>
+            </select>
+            <textarea ID="info" type='text' data-size='sm' class="customCss_tab"></textarea>
+            <div class="bottom_buttons">
+              <div class="b_buttons"> 
+                <button class="copy_button" onclick="addCustomStyling()">
+                    Update
+                </button>
+              </div>
+            </div>
         </div>
         <div style=" width:100px; height: 100px; background-color: white;"></div>
       </div>
@@ -816,7 +851,7 @@
         function duplicate(id) {
           var CopyFrom = document.getElementById(id).value;
           var paste = document.getElementById("info");
-          paste.value = CopyFrom;
+          paste.value += CopyFrom;
         }
       </script>
 
@@ -870,6 +905,18 @@
         toggle between hiding and showing the dropdown content */
         //sidebar
         $(document).ready(function () {
+
+          let val = $('#customCssTypeSelections').find("option:selected").attr('value');
+          $('.customCss_tab').css({display: "none"});
+          $('#customCssTypeSelections').change(function(){
+              val = $(this).find("option:selected").attr('value');
+              if(val == 'CustomCss'){
+                  $('.customCss_tab').css({display: "block"});
+              }else{
+                  $('.customCss_tab').css({display: "none"});
+              }
+          });
+
           // Show hide popover
           $("#dropdown").click(function () {
             $(this).find("#dropdown-menu").slideToggle("fast");
@@ -922,6 +969,12 @@
           parent.postMessage({ pluginMessage: { category: 'tagName', nodeID, tagName } }, '*');
         }
 
+        function addCustomStyling(){
+          let customStyle = document.querySelector('.customCss_tab').value;
+          let nodeID = document.querySelector('.node-id').value;
+          parent.postMessage({ pluginMessage: {category: 'customStyle', nodeID, customStyle} }, '*');
+        }
+
         function formatCode(html) {
             var tab = '   ';
             var result = '';
@@ -958,7 +1011,22 @@
         onmessage = (event) => {
           let code = ``;
           code = event.data.pluginMessage.codeString;
+          // Parameters for the BreakPoints
           let bpValue = event.data.pluginMessage.bpValue;
+          let addedBreakPoints = event.data.pluginMessage.bpString;
+          
+          // Parameters for the Custom Classes
+          let customTailwind = event.data.pluginMessage.customTailwindValue;
+
+          // Parameters for the Custom Tags
+          let customTag = event.data.pluginMessage.customTag;
+
+          // Parameters for the Custom Interactions
+          let customInteractionValue = event.data.pluginMessage.customInteractionValue;
+
+          // Parameters for the Custom Styling
+          let customStyling = event.data.pluginMessage.customStyleValue;
+
           let formatedCode = formatCode(code);
           
           // Checking if the code is changed or not
@@ -969,7 +1037,6 @@
 
           //If there is any already given breakpoints value, then fill in the value (to display)
           if(bpValue){
-
             document.querySelector('.sm').value = bpValue['sm'];
             document.querySelector('.md').value = bpValue['md'];
             document.querySelector('.lg').value = bpValue['lg'];
@@ -983,7 +1050,34 @@
             document.querySelector('._2xl').value = "";
           }
 
-        }
+          // If there is any already given custom Classes, then fill in the value (to display) for the UI
+          if(customTailwind){
+            document.querySelector('.tuc_tab').value = customTailwind.toString();
+          }else{
+            document.querySelector('.tuc_tab').value = "";
+          }
+
+          // If there is any already given custom Tag, then fill in the value (to display) for the UI
+          if(customTag){
+            document.querySelector('#text').value = customTag.toString();
+          }else{
+            document.querySelector('#text').value = "";
+          }
+
+          // If there is any already given custom Interactions, then fill in the value (to display) for the UI
+          if(customInteractionValue){
+            document.querySelector('.inter_tab').value = customInteractionValue.toString();
+          }else{
+            document.querySelector('.inter_tab').value = "";
+          }
+
+          // if there is any already given custom styling, then fill in the value (to display) for the UI
+          if(customStyling){
+            document.querySelector('.customCss_tab').value = customStyling.toString();
+            }else{
+              document.querySelector('.customCss_tab').value = "";
+            }
+          }
 
       </script>
 </body>
