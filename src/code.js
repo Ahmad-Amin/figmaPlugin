@@ -32,41 +32,40 @@ const removeGarbageInteractions = (val) => {
 // This will iterate through all the layers and generate the html code from it
 const createCode = (node) => {
 
-
     let indent = '';
     let classString = '';
     
     let styleString = `${getDataFromPlugin(node, 'CUSTOM_STYLES')}`;
     styleString = styleString.replace('undefined', '');
 
+    let tag = getDataFromPlugin(node, 'CUSTOM_TAGS');
+    let userTag = `${tag ? tag : 'div'}`;    // If user set any kind of tag, then use it otherwise use the standard div tag
+    
     console.log(node);
 
     if('children' in node){
+        
 
         let children = node.children;
 
-        let tag = getDataFromPlugin(node, 'CUSTOM_TAGS');
-        let userTag = `${tag ? tag : 'div'}`;    // If user set any kind of tag, then use it otherwise use the standard div tag
-
-
         // cheking if the node is an imageNode
-        if(node.fills.length >= 1){
-            if(node.fills[0].type == "IMAGE"){
-                let imgH = node.height;
-                let imgW = node.width;
-
-                classString = `${getbreakPointsData(node)} ${getDataFromPlugin(node, 'CUSTOM_CLASSES')} ${getDataFromPlugin(node, 'CUSTOM_INTERACTIONS')} ${getBoxShadow(node)}`;
-                codeString += `${indent}<img style='${styleString}' class='${classString}' src='https://via.placeholder.com/${imgW}x${imgH}' />\n`;
-
-                return;
+        if("fills" in node){
+            if(node.fills.length >= 1){
+                if(node.fills[0].type == "IMAGE"){
+                    let imgH = node.height;
+                    let imgW = node.width;
+    
+                    classString = `${getbreakPointsData(node)} ${getDataFromPlugin(node, 'CUSTOM_CLASSES')} ${getDataFromPlugin(node, 'CUSTOM_INTERACTIONS')} ${getBoxShadow(node)}`;
+                    codeString += `${indent}<img style='${styleString}' class='${classString}' src='https://via.placeholder.com/${imgW}x${imgH}' />\n`;
+    
+                    return;
+                }
             }
         }
 
-
-
         // Check for the Vector Node:
-        if(node.type == "VECTOR"){
-            let path = node.fillGeometry[0].data;
+        if(node.type == "VECTOR" || node.type == "ELLIPSE"){
+            let path = node.fillGeometry.length > 0 ? node.fillGeometry[0].data : '';
             let width = node.width;
             let height = node.height;
             let strokeColor = node.strokes.length > 0 ? RGBToHex(node.strokes[0].color) : 'none';
@@ -85,8 +84,9 @@ const createCode = (node) => {
         
         const values = getValues(node);
         const flexString = getTailWindClasses(values);
-
+        
         classString = `${getbreakPointsData(node)} ${getDataFromPlugin(node, 'CUSTOM_CLASSES')} ${getDataFromPlugin(node, 'CUSTOM_INTERACTIONS')} ${getWidth(node)} ${getHeight(node)} ${getBGColor(node)} ${flexString} ${getBorderWidthClass(node)} ${getSpacingFromParent(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getBoxShadow(node)}`;
+        console.log("IF-4");
         classString = classString.replaceAll('undefined', ''); //Removing any undefiend value (whose figma-->tailwind mapping is not avialable:)
         classString = classString.replace(/ +(?= )/g, ' ').trim(); // This is used to trim any kind of excess white spaces
         
@@ -100,23 +100,26 @@ const createCode = (node) => {
     }else{
 
         // cheking if the node is an imageNode
-        if(node.fills.length >= 1){
-            if(node.fills[0].type == "IMAGE"){
-                let imgH = node.height;
-                let imgW = node.width;
-
-                classString = `${getbreakPointsData(node)} ${getDataFromPlugin(node, 'CUSTOM_CLASSES')} ${getDataFromPlugin(node, 'CUSTOM_INTERACTIONS')} ${getBoxShadow(node)}`;
-                classString = classString.replaceAll('undefined', ''); //Removing any undefiend value (whose figma-->tailwind mapping is not avialable:)
-                classString = classString.replace(/ +(?= )/g, ' ').trim(); // This is used to trim any kind of excess white spaces
-                codeString += `${indent}<img style='${styleString}' class='${classString}' src='https://via.placeholder.com/${imgW}x${imgH}' />\n`;
-
-                return;
+        if("fills" in node){
+            if(node.fills.length >= 1){
+                if(node.fills[0].type == "IMAGE"){
+                    let imgH = node.height;
+                    let imgW = node.width;
+    
+                    classString = `${getbreakPointsData(node)} ${getDataFromPlugin(node, 'CUSTOM_CLASSES')} ${getDataFromPlugin(node, 'CUSTOM_INTERACTIONS')} ${getBoxShadow(node)}`;
+                    classString = classString.replaceAll('undefined', ''); //Removing any undefiend value (whose figma-->tailwind mapping is not avialable:)
+                    classString = classString.replace(/ +(?= )/g, ' ').trim(); // This is used to trim any kind of excess white spaces
+                    codeString += `${indent}<img style='${styleString}' class='${classString}' src='https://via.placeholder.com/${imgW}x${imgH}' />\n`;
+    
+                    return;
+                }
             }
         }
+        
 
         // Check for the Vector Node:
-        if(node.type == "VECTOR"){
-            let path = node.fillGeometry[0].data;
+        if(node.type == "VECTOR" || node.type == "ELLIPSE"){
+            let path = node.fillGeometry.length > 0 ? node.fillGeometry[0].data : '';
             let width = node.width;
             let height = node.height;
             let strokeColor = node.strokes.length > 0 ? RGBToHex(node.strokes[0].color) : 'none';

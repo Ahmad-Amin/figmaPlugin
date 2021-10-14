@@ -80,22 +80,27 @@ function checkForMaxWidth(width){
 }
 
 export const getWidth = (node) => {
-    let w = Math.round(node.width, 1);
-    if(w>384){
-        return getFractionalWidth(node);
-    }else if(w<=384){
-        return pixelToTailwind[w]?`w-${pixelToTailwind[w]} `:'';
+    if("width" in node){
+        let w = Math.round(node.width, 1);
+        if(w>384){
+            return getFractionalWidth(node);
+        }else if(w<=384){
+            return pixelToTailwind[w]?`w-${pixelToTailwind[w]} `:'';
+        }
     }
+    
     return ``;
 }
 
 export const getHeight = (node) => {
-    let h = Math.round(node.height, 1);
-    if(h>384){
-        // return getFractionalHeight(node);
-        return ``;
-    }else if(h<=384){
-        return pixelToTailwind[h]?`h-${pixelToTailwind[h]} `:'';
+    if("height" in node){
+        let h = Math.round(node.height, 1);
+        if(h>384){
+            // return getFractionalHeight(node);
+            return ``;
+        }else if(h<=384){
+            return pixelToTailwind[h]?`h-${pixelToTailwind[h]} `:'';
+        }
     }
     return ``;
 }

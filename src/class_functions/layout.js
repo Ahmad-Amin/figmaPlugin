@@ -3,14 +3,14 @@ const { flexMap, justifyMap, alignMap } = require('../maps/layoutMaps');
 const { pixelToTailwind } = require('../maps/map');
 //flex
 export const getValues = (node) => {
-    let mode = node.layoutMode; // flex-row or flex-col
-    let justify = node.primaryAxisAlignItems; // justify-items 
-    let align = node.counterAxisAlignItems; // align
-    let paddingLeft = node.paddingLeft; //padding between child and border
-    let paddingRight = node.paddingRight;
-    let paddingTop = node.paddingTop;
-    let paddingBottom = node.paddingBottom;
-    let spacing = node.itemSpacing; // space between items
+    let mode = node.layoutMode ? node.layoutMode : ''; // flex-row or flex-col
+    let justify = node.primaryAxisAlignItems ? node.primaryAxisAlignItems : ''; // justify-items 
+    let align = node.counterAxisAlignItems ? node.counterAxisAlignItems : ''; // align
+    let paddingLeft = node.paddingLeft ? node.paddingLeft : ''; //padding between child and border
+    let paddingRight = node.paddingRight ? node.paddingRight : '';
+    let paddingTop = node.paddingTop ? node.paddingTop : '';
+    let paddingBottom = node.paddingBottom ? node.paddingBottom : '';
+    let spacing = node.itemSpacing ? node.itemSpacing : ''; // space between items
 
     //assuming that the paddings are equal - taking only one value    
 

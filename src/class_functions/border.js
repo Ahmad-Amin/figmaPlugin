@@ -39,9 +39,12 @@ export const getBorderWidthClass = (node) => {
 
 
 export const getBorderColor = (node) => {
-    if(node.strokes.length > 0){
-        let borderColor = node.strokes[0].color;
-        return `border-${colorMap[RGBToHex(borderColor)]}`;
+    if("strokes" in node){
+        if(node.strokes.length > 0){
+            let borderColor = node.strokes[0].color;
+            return `border-${colorMap[RGBToHex(borderColor)]}`;
+        }
     }
+    
 }
 
