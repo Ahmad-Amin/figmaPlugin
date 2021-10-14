@@ -7,6 +7,34 @@ export let addedCustomStyling = {};  // This object contains the mapping of node
 // Global Variables;
 
 
+// Function to remove specific Data from the Plugin Node
+export const removeDataFromTree = (node) => {
+    return;
+}
+
+// Function to all stored data in the node and return the string of already present String
+export const getDataFromPlugin = (node, key) => {
+    
+    let value = node.getPluginData(key);
+    if(value){
+        return value.replaceAll('"', '');
+    }
+    return '';
+    
+}
+export const getbreakPointsData = (node) => {
+    let b = node.getPluginData('BREAKPOINTS');
+    let bObj = b.length > 0 ? JSON.parse(b) : b;
+    let returnString;
+    Object.keys(bObj).map(val => {       //Mapping through all the keys from input breakpoints entered by the User
+        if(bObj[val].length > 0){        // Checking if there is a value for a key (i.e. to ignore the key, whose value is empty)
+            returnString  = returnString + val.toString()+":" + bObj[val].toString() + " ";  //Constructing the String format -->{sm:bg-red-blue lg:font-bold}..
+        }
+    });
+    return returnString;
+}
+
+
 // Two functions for seting breakPoints 
 // 1. Creating the breakpoints String
 // 2. Checking for the node if its value is already set or not

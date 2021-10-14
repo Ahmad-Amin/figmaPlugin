@@ -253,6 +253,30 @@
     cursor: pointer;
   }
 
+  .clear_button{
+    font-family: Inter;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    border: none;
+    border-radius: 0.25rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(200, 20, 2, var(--tw-bg-opacity));
+    border-width: 1px;
+    font-size: 0.75rem;
+    line-height: .75rem;
+    font-weight: 500;
+    text-align: center;
+    --tw-text-opacity: 1;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+    margin-right: 30px;
+    cursor: pointer;
+  }
+
+
+
+
   .tabh_content {
     display: none;
   }
@@ -548,6 +572,9 @@
         <!-- style="display: none;" -->
         <div class="bottom_buttons">
           <div class="b_buttons">
+            <button class="clear_button" onclick="clearFromPlugin()" >
+              Clear
+            </button>
             <button class="preview_button">
               preview
             </button>
@@ -585,13 +612,15 @@
             <p class="tab2_text" style="margin-top: -5px;">sm</p>
             <textarea type='text' data-size='sm' id="autoresizing4" class="textarea sm"></textarea>
           </div>
-
         </div>
         <div class="bottom_buttons">
           <div class="b_buttons">
             <button class="copy_button" onclick="addBreakpoints()">
               Update
             </button>
+            <!-- <button class="clear_button" onclick="clearFromPlugin('BREAKPOINTS')" >
+              Clear
+            </button> -->
           </div>
         </div>
       </div>
@@ -614,6 +643,9 @@
             <button class="copy_button" onclick="addCustomClasses()">
               Update
             </button>
+            <!-- <button class="clear_button" onclick="clearFromPlugin('CUSTOM_CLASSES')" >
+              Clear
+            </button> -->
           </div>
         </div>
       </div>
@@ -689,6 +721,9 @@
             <button class="copy_button" onclick="addTagName()">
               Update
             </button>
+            <!-- <button class="clear_button" onclick="clearFromPlugin('CUSTOM_TAGS')" >
+              Clear
+            </button> -->
           </div>
         </div>
       </div>
@@ -754,6 +789,9 @@
             <button class="copy_button" onclick="addCustomInteractions()">
               Update
             </button>
+            <!-- <button class="clear_button" onclick="clearFromPlugin('CUSTOM_INTERACTIONS')" >
+              Clear
+            </button> -->
           </div>
         </div>
       </div>
@@ -773,6 +811,9 @@
                 <button class="copy_button" onclick="addCustomStyling()">
                     Update
                 </button>
+                <!-- <button class="clear_button" onclick="clearFromPlugin('CUSTOM_STYLES')" >
+                  Clear
+                </button> -->
               </div>
             </div>
         </div>
@@ -975,6 +1016,10 @@
           parent.postMessage({ pluginMessage: {category: 'customStyle', nodeID, customStyle} }, '*');
         }
 
+        function clearFromPlugin(key){
+          parent.postMessage({pluginMessage: {clearData: 'clearData'}}, '*');
+        }
+
         function formatCode(html) {
             var tab = '   ';
             var result = '';
@@ -1030,9 +1075,11 @@
           let formatedCode = formatCode(code);
           
           // Checking if the code is changed or not
-          if(code.length > 1){
-            codeMirror.setValue(formatedCode);
-            codeMirror.refresh();
+          codeMirror.setValue(formatedCode);
+          codeMirror.refresh();
+
+          if(typeof bpValue === "string"){
+            bpValue = JSON.parse(bpValue);
           }
 
           //If there is any already given breakpoints value, then fill in the value (to display)

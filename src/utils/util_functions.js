@@ -1,6 +1,6 @@
 //function to convert rgb to hex
 //figma gives values in RGB wheres tailwind works in hex
-function RGBToHex(rgb) {
+export const RGBToHex = (rgb) => {
     if(rgb){
         let r=rgb.r;
         let g=rgb.g;
@@ -26,9 +26,4 @@ function RGBToHex(rgb) {
         // console.log("#" + r + g + b)
         return `#${r.toUpperCase() + g.toUpperCase() + b.toUpperCase()}`;
     }
-}
-
-
-module.exports = {
-    RGBToHex,
 }
