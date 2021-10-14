@@ -86,7 +86,6 @@ const createCode = (node) => {
         const flexString = getTailWindClasses(values);
         
         classString = `${getbreakPointsData(node)} ${getDataFromPlugin(node, 'CUSTOM_CLASSES')} ${getDataFromPlugin(node, 'CUSTOM_INTERACTIONS')} ${getWidth(node)} ${getHeight(node)} ${getBGColor(node)} ${flexString} ${getBorderWidthClass(node)} ${getSpacingFromParent(node)} ${getBorderColor(node)} ${getBorderRadiusClass(node)} ${getBoxShadow(node)}`;
-        console.log("IF-4");
         classString = classString.replaceAll('undefined', ''); //Removing any undefiend value (whose figma-->tailwind mapping is not avialable:)
         classString = classString.replace(/ +(?= )/g, ' ').trim(); // This is used to trim any kind of excess white spaces
         
